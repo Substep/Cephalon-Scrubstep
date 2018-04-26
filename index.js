@@ -1,7 +1,7 @@
 // Discord.js bot
 const Discord = require("discord.js");
-const client = new Discord.Client();
 const config = require("./config.json");
+const client = new Discord.Client();
 const fs = require("fs")
 
 client.on('ready', () => {
@@ -43,7 +43,7 @@ client.on("message", (message) => {
       var beg = "Sucessfully changed the prefix to";
       var prefix = config.prefix;
       fs.writeFile("./config.json", JSON.stringify(config), (err) => console.error);
-    return message.send(beg.concat(prefix))
+      return message.send(beg.concat(prefix))
 }
 });
 
