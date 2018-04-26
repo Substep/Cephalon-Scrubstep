@@ -17,8 +17,7 @@
   },
   "keywords": [
     "heroku",
-    "discord.js",
-    "snekfetch"
+    "discord.js"
   ],
   "author": "Substep",
   "license": "MIT",
@@ -27,7 +26,6 @@
   },
   "homepage": "https://github.com/Substep/SubstepsWarframe/blob/master/README.md",
   "dependencies": {
-    "discord.js": "^11.3.0",
-    "snekfetch": "^4.0.0"
+    "discord.js": "^11.3.2"
   }
 }

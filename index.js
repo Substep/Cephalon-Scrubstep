@@ -29,14 +29,22 @@ client.on("message", (message) => {
   }
 });
 
-if(message.content.startsWith(config.prefix + "prefix")) {
-  // Gets the prefix from the command (eg. "!prefix +" it will take the "+" from it)
-  let newPrefix = message.content.split(" ").slice(1, 2)[0];
-  // change the configuration in memory
-  config.prefix = newPrefix;
+client.on("message", (message) => {
+  if(message.content.startsWith(config.prefix + "prefix")) {
+    const modRole = message.guild.roles.find("name", "Owner");
+  if (!modRole) 
+    return console.log("The Owner role does not exist.");
 
-  // Now we have to save the file.
-  fs.writeFile("./config.json", JSON.stringify(config), (err) => console.error);
+  if (!message.member.roles.has(modRole.id))
+    return message.send("You can't use this command.");
+
+      let newPrefix = message.content.split(" ").slice(1, 2)[0];
+      config.prefix = newPrefix;
+      var beg = "Sucessfully changed the prefix to";
+      var prefix = config.prefix;
+      fs.writeFile("./config.json", JSON.stringify(config), (err) => console.error);
+    return message.send(beg.concat(prefix))
 }
+});
 
 client.login(process.env.TOKEN);

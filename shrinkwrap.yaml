@@ -1,6 +1,5 @@
 dependencies:
   discord.js: 11.3.2
-  snekfetch: 4.0.0
 packages:
   /async-limiter/1.0.0:
     dev: false
@@ -42,10 +41,6 @@ packages:
     dev: false
     resolution:
       integrity: sha512-NjxjITIj04Ffqid5lqr7XdgwM7X61c/Dns073Ly170bPQHLm6jkmelye/eglS++1nfTWktpP6Y2bFXjdPlQqdw==
-  /snekfetch/4.0.0:
-    dev: false
-    resolution:
-      integrity: sha512-T1Z9A69uet/Ti69Rmr2U6ZeU6VreucawFSB61tlA+lIARFSBuUxQgFWpVVa47KQgfyyBOJA5midBk7IfhlvelQ==
   /tweetnacl/1.0.0:
     dev: false
     resolution:
@@ -58,8 +53,7 @@ packages:
     resolution:
       integrity: sha512-ZGh/8kF9rrRNffkLFV4AzhvooEclrOH0xaugmqGsIfFgOE/pIz4fMc4Ef+5HSQqTEug2S9JZIWDR47duDSLfaA==
 registry: 'https://registry.npmjs.org/'
-shrinkwrapMinorVersion: 4
+shrinkwrapMinorVersion: 5
 shrinkwrapVersion: 3
 specifiers:
-  discord.js: ^11.3.0
-  snekfetch: ^4.0.0
+  discord.js: ^11.3.2
