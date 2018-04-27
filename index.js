@@ -5,8 +5,9 @@ const config = require("./config.json");
 const fs = require("fs")
 
 client.on('ready', () => {
-    client.user.setActivity('Fashionframe | ' + config.prefix + 'help', {type: 'WATCHING'});
+  client.user.setActivity('Fashionframe | ' + config.prefix + 'help', {type: 'WATCHING'});
 });
+  
 
 //One giant joke
 client.on('message', message => {
@@ -16,10 +17,6 @@ client.on('message', message => {
     var name = message.content.replace(/i am/gi, "");
     message.channel.send(message1 + name + message2);
   }
-});
-// Edit a channel
-client.on("guildMemberAdd", member => {
-  message.guild.channels.get("439515842892398594").setName("Total Users: " + guild.memberCount);
 });
 
 client.on("message", (message) => {
