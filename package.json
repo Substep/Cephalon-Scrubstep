@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Substep/SubstepsWarframe"
+    "url": "git+https://github.com/Substep/Cephalon-Scrubstep"
   },
   "keywords": [
     "heroku",
@@ -22,9 +22,9 @@
   "author": "Substep",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Substep/SubstepsWarframe/issues"
+    "url": "https://github.com/Substep/Cephalon-Scrubstep/issues"
   },
-  "homepage": "https://github.com/Substep/SubstepsWarframe/blob/master/README.md",
+  "homepage": "https://github.com/Substep/Cephalon-Scrubstep/blob/master/README.md",
   "dependencies": {
     "discord.js": "^11.3.2"
   }
