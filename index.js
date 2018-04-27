@@ -1,6 +1,7 @@
 // Discord.js bot
 const Discord = require("discord.js");
 const client = new Discord.Client();
+const config = require("./config.json");
 const fs = require("fs")
 
 client.on('ready', () => {
@@ -17,12 +18,25 @@ client.on('message', message => {
   }
 });
 
-client.on("message", message => {
-  if (!message.content.startsWith(process.env.prefix) || message.author.bot) return;
-  
-  if (message.content.toLowerCase().startsWith(process.env.prefix + "ping")) {
-    message.channel.send(new Date().getTime() - message.createdTimestamp + " ms");
+client.on("message", (message) => {
+  if (!message.content.startsWith(config.prefix) || message.author.bot) return;
+
+  if (message.content.toLowerCase().startsWith(config.prefix + "ping")) {
+    message.channel.send({
+      embed: {
+        "color": 3447003,
+        "timestamp": new Date(),
+        "footer": {
+          "icon_url": client.user.avatarURL,
+          "text": client.user.username
+        },
+        "fields": [{
+          "name": "Ping Calculator",
+          "value": new Date().getTime() - message.createdTimestamp + " ms"
+        }]
+      }
+    });
   }
-  });
+});
 
 client.login(process.env.TOKEN);
