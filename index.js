@@ -5,7 +5,7 @@ const config = require("./config.json");
 const fs = require("fs")
 
 client.on('ready', () => {
-    client.user.setActivity('Your Fashionframes', {type: 'WATCHING'});
+    client.user.setActivity('Fashionframe | ' + config.prefix + 'help', {type: 'WATCHING'});
 });
 
 //One giant joke
@@ -17,6 +17,10 @@ client.on('message', message => {
     message.channel.send(message1 + name + message2);
   }
 });
+// Edit a channel
+client.on("guildMemberAdd", member => {
+  message.guild.channels.get("439515842892398594").setName("Total Users: " + guild.memberCount);
+});
 
 client.on("message", (message) => {
   if (!message.content.startsWith(config.prefix) || message.author.bot) return;
@@ -25,7 +29,6 @@ client.on("message", (message) => {
     message.channel.send({
       embed: {
         "color": 3447003,
-        "timestamp": new Date(),
         "footer": {
           "icon_url": client.user.avatarURL,
           "text": client.user.username
@@ -53,14 +56,13 @@ client.on("message", (message) => {
     message.channel.send({
       embed: {
         "color": 3447003,
-        "timestamp": new Date(),
         "footer": {
           "icon_url": client.user.avatarURL,
           "text": client.user.username
         },
         "fields": [{
-          "name": "Success",
-          "value": "Prefix has been changed"
+          "name": "Success!",
+          "value": "Prefix has been changed to " + config.prefix
         }]
       }
     });
