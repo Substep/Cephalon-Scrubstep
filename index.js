@@ -41,7 +41,7 @@ client.on("message", (message) => {
         "value": "Tells you your current ping."
       },
       {
-        "name": config.prefix + "prefix (prefix)",
+        "name": config.prefix + "prefix",
         "value": "Changes the bots prefix to specified prefix."
         }]
       }
