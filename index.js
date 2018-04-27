@@ -22,6 +22,36 @@ client.on('message', message => {
 client.on("message", (message) => {
   if (!message.content.startsWith(config.prefix) || message.author.bot) return;
 
+  if (message.content.toLowerCase().startsWith(config.prefix + "help")) {
+    message.channel.send({
+      embed: {
+    "title": "Commands",
+    "color": 3447003,
+    "footer": {
+      "icon_url": client.user.avatarURL,
+      "text": client.user.username
+    },
+    "fields": [
+      {
+        "name": config.prefix + "help",
+        "value": "Shows this message of all available commands."
+      },
+      {
+        "name": config.prefix + "ping",
+        "value": "Tells you your current ping."
+      },
+      {
+        "name": config.prefix + "prefix (prefix)",
+        "value": "Changes the bots prefix to specified prefix."
+        }]
+      }
+    });
+  }
+});
+
+client.on("message", (message) => {
+  if (!message.content.startsWith(config.prefix) || message.author.bot) return;
+
   if (message.content.toLowerCase().startsWith(config.prefix + "ping")) {
     message.channel.send({
       embed: {
