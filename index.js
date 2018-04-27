@@ -50,6 +50,20 @@ client.on("message", (message) => {
 
   // Now we have to save the file.
   fs.writeFile("./config.json", JSON.stringify(config), (err) => console.error);
+    message.channel.send({
+      embed: {
+        "color": 3447003,
+        "timestamp": new Date(),
+        "footer": {
+          "icon_url": client.user.avatarURL,
+          "text": client.user.username
+        },
+        "fields": [{
+          "name": "Success",
+          "value": "Prefix has been changed"
+        }]
+      }
+    });
 }
 });
 
