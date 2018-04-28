@@ -6,6 +6,20 @@ const fs = require("fs")
 
 client.on('ready', () => {
   client.user.setActivity('Fashionframe | ' + config.prefix + 'help', {type: 'PLAYING'});
+  
+  client.channels.get('439819029797142538').send({
+        embed: {
+        "color": 3447003,
+        "footer": {
+          "icon_url": client.user.avatarURL,
+          "text": client.user.username
+        },
+        "fields": [{
+          "name": "Cephalon Scrubstep",
+          "value": "Has successfully booted up!"
+        }]
+      }
+    });
 });
   
 client.on('presenceUpdate', (OldMember,NewMember,member) => {
@@ -14,6 +28,16 @@ client.on('presenceUpdate', (OldMember,NewMember,member) => {
   
   if (!member.presence.game.name === "Warframe") {
     member.removeRole('439790106287669248').catch(console.error);
+  }
+  }
+});
+
+client.on('presenceUpdate', (OldMember,NewMember,member) => {
+  if (member.presence.game.name === "Visual Studio Code") {
+    member.addRole('439818539155587084').catch(console.error);
+  
+  if (!member.presence.game.name === "Visual Studio Code") {
+    member.removeRole('439818539155587084').catch(console.error);
   }
   }
 });
