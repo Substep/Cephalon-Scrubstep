@@ -5,9 +5,18 @@ const config = require("./config.json");
 const fs = require("fs")
 
 client.on('ready', () => {
-  client.user.setActivity('Fashionframe | ' + config.prefix + 'help', {type: 'WATCHING'});
+  client.user.setActivity('Fashionframe | ' + config.prefix + 'help', {type: 'PLAYING'});
 });
   
+client.on('presenceUpdate', (OldMember,NewMember,member) => {
+  if (member.presence.game.name === "Warframe") {
+    member.addRole('439790106287669248').catch(console.error);
+  
+  if (!member.presence.game.name === "Warframe") {
+    member.removeRole('439790106287669248').catch(console.error);
+  }
+  }
+});
 
 //One giant joke
 client.on('message', message => {
