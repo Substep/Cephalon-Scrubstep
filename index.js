@@ -27,21 +27,21 @@ client.on('ready', () => {
     });
 });
 
-//Updates channel when user joins
-client.on("guildMemberAdd", (member) => {
-  const guild = member.guild;
-  newUsers.set(member.id, member.user);
+//Gives the role with the id when playing Warframe
+client.on('presenceUpdate', (OldMember, NewMember) => {
+    if (NewMember.presence.game == null) return;
+    if (NewMember.presence.game.name == "Warframe") {
+        NewMember.addRole('439895350799630346').catch(console.error);
+    }
+    });
 
-  guild.channels.find("id", "439862729084370954").setName("Total Users: " + guild.memberCount);
-});
-
-//Updates channel when user leaves
-client.on("guildMemberRemove", (member) => {
-  const guild = member.guild;
-  newUsers.set(member.id, member.user);
-
-  guild.channels.find("id", "439862729084370954").setName("Total Users: " + guild.memberCount);
-});
+//Removes the role with the id when quitting Warframe
+client.on('presenceUpdate', (OldMember, NewMember) => {
+    if (NewMember.presence.game == null)
+    if (NewMember.roles.has('439895350799630346')) {
+        NewMember.removeRole('439895350799630346').catch(console.error);
+    }
+    });
 
 //Sends a oof gif when someone starts a message with "oof"
 client.on("message", (message) => {
