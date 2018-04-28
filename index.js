@@ -24,8 +24,6 @@ client.on('ready', () => {
 });
   
 client.on('presenceUpdate', (OldMember,NewMember) => {
-  if (NewMember.presence.game.equals("null")) return;
-  
   if (NewMember.presence.game.equals("Warframe")) {
     NewMember.addRole('439790106287669248').catch(console.error);
   
