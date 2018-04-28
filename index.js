@@ -25,7 +25,7 @@ client.on('ready', () => {
     });
 });
 
-//Checks if player is playing Warframe and gives them a role with the id
+//Checks if player is playing Warframe and gives them a role with the id (doesn't work for some reason)
 client.on('presenceUpdate', (OldMember,NewMember) => {
   if (NewMember.presence.game.equals("Warframe")) {
     NewMember.addRole('439790106287669248').catch(console.error);
