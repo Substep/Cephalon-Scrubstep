@@ -1,6 +1,7 @@
 // Discord.js bot
 const Discord = require("discord.js");
 const client = new Discord.Client();
+const newUsers = new Discord.Collection();
 const config = require("./config.json");
 const fs = require("fs")
 
@@ -17,23 +18,29 @@ client.on('ready', () => {
           "icon_url": client.user.avatarURL,
           "text": client.user.username
         },
-        "fields": [{
-          "name": "Cephalon Scrubstep",
-          "value": "Has successfully booted up!"
+        "fields": [
+      {
+        "name": "Bot Status:",
+        "value": "Successfully booted up."
         }]
       }
     });
 });
 
-//Checks if player is playing Warframe and gives them a role with the id (doesn't work for some reason)
-client.on('presenceUpdate', (OldMember,NewMember) => {
-  if (NewMember.presence.game.equals("Warframe")) {
-    NewMember.addRole('439790106287669248').catch(console.error);
-  
-  if (!NewMember.presence.game.equals("Warframe")) {
-    NewMember.removeRole('439790106287669248').catch(console.error);
-}
-  }
+//Updates channel when user joins
+client.on("guildMemberAdd", (member) => {
+  const guild = member.guild;
+  newUsers.set(member.id, member.user);
+
+  guild.channels.find("id", "439862729084370954").setName("Total Users: " + guild.memberCount);
+});
+
+//Updates channel when user leaves
+client.on("guildMemberRemove", (member) => {
+  const guild = member.guild;
+  newUsers.set(member.id, member.user);
+
+  guild.channels.find("id", "439862729084370954").setName("Total Users: " + guild.memberCount);
 });
 
 //Sends a oof gif when someone starts a message with "oof"
