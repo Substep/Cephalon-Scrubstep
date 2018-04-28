@@ -4,9 +4,11 @@ const client = new Discord.Client();
 const config = require("./config.json");
 const fs = require("fs")
 
+//Sets the activity of the bot
 client.on('ready', () => {
   client.user.setActivity('Fashionframe | ' + config.prefix + 'help', {type: 'PLAYING'});
-  
+
+//Sends message into the channel with the id that bot has started
   client.channels.get('439819029797142538').send({
         embed: {
         "color": 3447003,
@@ -22,7 +24,8 @@ client.on('ready', () => {
       }
     });
 });
-  
+
+//Checks if player is playing Warframe and gives them a role with the id
 client.on('presenceUpdate', (OldMember,NewMember) => {
   if (NewMember.presence.game.equals("Warframe")) {
     NewMember.addRole('439790106287669248').catch(console.error);
@@ -33,7 +36,21 @@ client.on('presenceUpdate', (OldMember,NewMember) => {
   }
 });
 
-//One giant joke
+//Sends a oof gif when someone starts a message with "oof"
+client.on("message", (message) => {
+  if (message.content.toLowerCase().startsWith("oof")) {
+    message.channel.send({
+      embed: {
+        "color": 3447003,
+        "image": {
+        "url": "https://media1.tenor.com/images/68b4a3e2a4bded23f88bba28223c81a1/tenor.gif"
+    },
+        },
+    });
+  }
+});
+
+//I am a noob
 client.on('message', message => {
   if (message.content.toLowerCase().startsWith("i am")) {
     var message1 = "Hello";
@@ -43,6 +60,7 @@ client.on('message', message => {
   }
 });
 
+//A simple help command
 client.on("message", (message) => {
   if (!message.content.startsWith(config.prefix) || message.author.bot) return;
 
@@ -73,6 +91,7 @@ client.on("message", (message) => {
   }
 });
 
+//Tells you your ping to the bot
 client.on("message", (message) => {
   if (!message.content.startsWith(config.prefix) || message.author.bot) return;
 
@@ -93,6 +112,7 @@ client.on("message", (message) => {
   }
 });
 
+//Changes the prefix of the bot
 client.on("message", (message) => {
   if (!message.content.startsWith(config.prefix) || message.author.bot) return;
 
