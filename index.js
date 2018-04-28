@@ -10,6 +10,7 @@ client.on('ready', () => {
   client.channels.get('439819029797142538').send({
         embed: {
         "color": 3447003,
+        "timestamp": new Date(),
         "footer": {
           "icon_url": client.user.avatarURL,
           "text": client.user.username
@@ -22,23 +23,15 @@ client.on('ready', () => {
     });
 });
   
-client.on('presenceUpdate', (OldMember,NewMember,member) => {
-  if (member.presence.game.name === "Warframe") {
-    member.addRole('439790106287669248').catch(console.error);
+client.on('presenceUpdate', (OldMember,NewMember) => {
+  if (NewMember.presence.game.equals("null")) return;
   
-  if (!member.presence.game.name === "Warframe") {
-    member.removeRole('439790106287669248').catch(console.error);
-  }
-  }
-});
-
-client.on('presenceUpdate', (OldMember,NewMember,member) => {
-  if (member.presence.game.name === "Visual Studio Code") {
-    member.addRole('439818539155587084').catch(console.error);
+  if (NewMember.presence.game.equals("Warframe")) {
+    NewMember.addRole('439790106287669248').catch(console.error);
   
-  if (!member.presence.game.name === "Visual Studio Code") {
-    member.removeRole('439818539155587084').catch(console.error);
-  }
+  if (!NewMember.presence.game.equals("Warframe")) {
+    NewMember.removeRole('439790106287669248').catch(console.error);
+}
   }
 });
 
