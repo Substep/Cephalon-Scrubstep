@@ -30,12 +30,12 @@ client.on('ready', () => {
 //Gives/Removes the role with the id when playing/quitting Warframe
 client.on('presenceUpdate', (OldMember, NewMember) => {
     if (NewMember.presence.game != null && NewMember.presence.game.name == "Warframe") {
-        NewMember.addRole('439895350799630346').catch(console.error);
+        NewMember.addRole('439947347724730378').catch(console.error);
     }
     else if (OldMember.presence.game !== null && OldMember.presence.game.name == "Warframe"
                 && NewMember.presence.game == null || NewMember.presence.game.name != "Warframe") {
-        if (OldMember.roles.has('439895350799630346')) {
-            OldMember.removeRole('439895350799630346').catch(console.error);
+        if (OldMember.roles.has('439947347724730378')) {
+            OldMember.removeRole('439947347724730378').catch(console.error);
         }
     }
 });
