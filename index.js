@@ -27,23 +27,7 @@ client.on('ready', () => {
     });
 });
 
-//Gives the role with the id when playing Warframe
-client.on('presenceUpdate', (OldMember, NewMember) => {
-    if (NewMember.presence.game == null) return;
-    if (NewMember.presence.game.name == "Warframe") {
-        NewMember.addRole('439895350799630346').catch(console.error);
-    }
-    });
-
-//Removes the role with the id when quitting Warframe
-client.on('presenceUpdate', (OldMember, NewMember) => {
-    if (NewMember.presence.game == null)
-    if (NewMember.roles.has('439895350799630346')) {
-        NewMember.removeRole('439895350799630346').catch(console.error);
-    }
-    });
-
-/*This should work too but eh
+//Gives/Removes the role with the id when playing/quitting Warframe
 client.on('presenceUpdate', (OldMember, NewMember) => {
     if (NewMember.presence.game != null && NewMember.presence.game.name == "Warframe") {
         NewMember.addRole('439895350799630346').catch(console.error);
@@ -55,7 +39,6 @@ client.on('presenceUpdate', (OldMember, NewMember) => {
         }
     }
 });
-*/
 
 //Sends a oof gif when someone starts a message with "oof"
 client.on("message", (message) => {
