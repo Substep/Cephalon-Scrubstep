@@ -43,6 +43,20 @@ client.on('presenceUpdate', (OldMember, NewMember) => {
     }
     });
 
+/*This should work too but eh
+client.on('presenceUpdate', (OldMember, NewMember) => {
+    if (NewMember.presence.game != null && NewMember.presence.game.name == "Warframe") {
+        NewMember.addRole('439895350799630346').catch(console.error);
+    }
+    else if (OldMember.presence.game !== null && OldMember.presence.game.name == "Warframe"
+                && NewMember.presence.game == null || NewMember.presence.game.name != "Warframe") {
+        if (OldMember.roles.has('439895350799630346')) {
+            OldMember.removeRole('439895350799630346').catch(console.error);
+        }
+    }
+});
+*/
+
 //Sends a oof gif when someone starts a message with "oof"
 client.on("message", (message) => {
   if (message.content.toLowerCase().startsWith("oof")) {
