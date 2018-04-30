@@ -29,6 +29,24 @@ client.on('ready', () => {
         }]
       }
     });
+});  
+
+//Updates Server Stats on Player Joining
+client.on('guildMemberAdd', (member) => {
+    member.guild.channels.get('440644230713704488').setName(`Total Users: ${member.guild.memberCount}`)
+    let humans = member.guild.members.filter(m => !m.user.bot).size;
+    member.guild.channels.get('440644263517224961').setName(`Member Count: ${humans}`)
+    let bots = member.guild.members.filter(m => m.user.bot).size;
+    member.guild.channels.get('440644282756497410').setName(`Bot Count: ${bots}`)
+});
+
+//Updates Server Stats on Player Leaving
+client.on('guildMemberRemove', (member) => {
+    member.guild.channels.get('440644230713704488').setName(`Total Users: ${member.guild.memberCount}`)
+    let humans = member.guild.members.filter(m => !m.user.bot).size;
+    member.guild.channels.get('440644263517224961').setName(`Member Count: ${humans}`)
+    let bots = member.guild.members.filter(m => m.user.bot).size;
+    member.guild.channels.get('440644282756497410').setName(`Bot Count: ${bots}`)
 });
 
 //Gives/Removes the role with the id when playing/quitting Warframe
@@ -61,7 +79,7 @@ client.on("message", (message) => {
 });
 
 //I am a noob
-client.on('message', message => {
+client.on('message', (message) => {
   if (message.author.bot) return; // this blocks the bot from responding to other bots
   if (message.channel.type === "dm") return; // this prevents dm commands
   if (message.content.toLowerCase().startsWith("i am")) {
