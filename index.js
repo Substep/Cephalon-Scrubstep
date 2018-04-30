@@ -4,6 +4,10 @@ const client = new Discord.Client();
 const newUsers = new Discord.Collection();
 const config = require("./config.json");
 const fs = require("fs")
+const noPerm = new Discord.RichEmbed()
+    .setTitle("Error!")
+    .setColor("277ECD")
+    .setDescription('You do not have permission to use this command!');
 
 //Sets the activity of the bot
 client.on('ready', () => {
@@ -12,7 +16,7 @@ client.on('ready', () => {
 //Sends message into the channel with the id that bot has started
   client.channels.get('439819029797142538').send({
         embed: {
-        "color": 3447003,
+        "color": 2588365,
         "timestamp": new Date(),
         "footer": {
           "icon_url": client.user.avatarURL,
@@ -42,10 +46,12 @@ client.on('presenceUpdate', (OldMember, NewMember) => {
 
 //Sends a oof gif when someone starts a message with "oof"
 client.on("message", (message) => {
+  if (message.author.bot) return; // this blocks the bot from responding to other bots
+  if (message.channel.type === "dm") return; // this prevents dm commands
   if (message.content.toLowerCase().startsWith("oof")) {
     message.channel.send({
       embed: {
-        "color": 3447003,
+        "color": 2588365,
         "image": {
         "url": "https://media1.tenor.com/images/68b4a3e2a4bded23f88bba28223c81a1/tenor.gif"
     },
@@ -56,6 +62,8 @@ client.on("message", (message) => {
 
 //I am a noob
 client.on('message', message => {
+  if (message.author.bot) return; // this blocks the bot from responding to other bots
+  if (message.channel.type === "dm") return; // this prevents dm commands
   if (message.content.toLowerCase().startsWith("i am")) {
     var message1 = "Hello";
     var message2 = ", my name is Scrubstep.";
@@ -66,13 +74,15 @@ client.on('message', message => {
 
 //A simple help command
 client.on("message", (message) => {
+  if (message.author.bot) return; // this blocks the bot from responding to other bots
+  if (message.channel.type === "dm") return; // this prevents dm commands
   if (!message.content.startsWith(config.prefix) || message.author.bot) return;
 
   if (message.content.toLowerCase().startsWith(config.prefix + "help")) {
     message.channel.send({
       embed: {
     "title": "Commands",
-    "color": 3447003,
+    "color": 2588365,
     "footer": {
       "icon_url": client.user.avatarURL,
       "text": client.user.username
@@ -97,12 +107,14 @@ client.on("message", (message) => {
 
 //Tells you your ping to the bot
 client.on("message", (message) => {
+  if (message.author.bot) return; // this blocks the bot from responding to other bots
+  if (message.channel.type === "dm") return; // this prevents dm commands
   if (!message.content.startsWith(config.prefix) || message.author.bot) return;
 
   if (message.content.toLowerCase().startsWith(config.prefix + "ping")) {
     message.channel.send({
       embed: {
-        "color": 3447003,
+        "color": 2588365,
         "footer": {
           "icon_url": client.user.avatarURL,
           "text": client.user.username
@@ -118,7 +130,10 @@ client.on("message", (message) => {
 
 //Changes the prefix of the bot
 client.on("message", (message) => {
+  if (message.author.bot) return; // this blocks the bot from responding to other bots
+  if (message.channel.type === "dm") return; // this prevents dm commands
   if (!message.content.startsWith(config.prefix) || message.author.bot) return;
+  if(message.author.id !== config.ownerID) return message.channel.send({noPerm})
 
   if(message.content.startsWith(config.prefix + "prefix")) {
   // Gets the prefix from the command (eg. "!prefix +" it will take the "+" from it)
@@ -130,7 +145,7 @@ client.on("message", (message) => {
   fs.writeFile("./config.json", JSON.stringify(config), (err) => console.error);
     message.channel.send({
       embed: {
-        "color": 3447003,
+        "color": 2588365,
         "footer": {
           "icon_url": client.user.avatarURL,
           "text": client.user.username
