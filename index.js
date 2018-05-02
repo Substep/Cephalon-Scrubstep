@@ -4,10 +4,6 @@ const client = new Discord.Client();
 const newUsers = new Discord.Collection();
 const config = require("./config.json");
 const fs = require("fs")
-const noPerm = new Discord.RichEmbed()
-    .setTitle("Error!")
-    .setColor("277ECD")
-    .setDescription('You do not have permission to use this command!');
 
 //Sets the activity of the bot
 client.on('ready', () => {
@@ -31,31 +27,13 @@ client.on('ready', () => {
     });
 });  
 
-//Updates Server Stats on Player Joining
-client.on('guildMemberAdd', (member) => {
-    member.guild.channels.get('440644230713704488').setName(`Total Users: ${member.guild.memberCount}`)
-    let humans = member.guild.members.filter(m => !m.user.bot).size;
-    member.guild.channels.get('440644263517224961').setName(`Member Count: ${humans}`)
-    let bots = member.guild.members.filter(m => m.user.bot).size;
-    member.guild.channels.get('440644282756497410').setName(`Bot Count: ${bots}`)
-});
-
-//Updates Server Stats on Player Leaving
-client.on('guildMemberRemove', (member) => {
-    member.guild.channels.get('440644230713704488').setName(`Total Users: ${member.guild.memberCount}`)
-    let humans = member.guild.members.filter(m => !m.user.bot).size;
-    member.guild.channels.get('440644263517224961').setName(`Member Count: ${humans}`)
-    let bots = member.guild.members.filter(m => m.user.bot).size;
-    member.guild.channels.get('440644282756497410').setName(`Bot Count: ${bots}`)
-});
-
 //Gives/Removes the role with the id when playing/quitting Warframe
 client.on('presenceUpdate', (OldMember, NewMember) => {
     if (NewMember.presence.game != null && NewMember.presence.game.name == "Warframe") {
         NewMember.addRole('439947347724730378').catch(console.error);
     }
     else if (OldMember.presence.game !== null && OldMember.presence.game.name == "Warframe"
-                && NewMember.presence.game == null || NewMember.presence.game.name != "Warframe") {
+                && NewMember.presence.game == null || NewMember.presence.game.name !== "Warframe") {
         if (OldMember.roles.has('439947347724730378')) {
             OldMember.removeRole('439947347724730378').catch(console.error);
         }
@@ -86,6 +64,30 @@ client.on('message', (message) => {
     var message1 = "Hello";
     var message2 = ", my name is Scrubstep.";
     var name = message.content.replace(/i am/gi, "");
+    message.channel.send(message1 + name + message2);
+  }
+});
+
+//Im a noob
+client.on('message', (message) => {
+  if (message.author.bot) return; // this blocks the bot from responding to other bots
+  if (message.channel.type === "dm") return; // this prevents dm commands
+  if (message.content.toLowerCase().startsWith("im")) {
+    var message1 = "Hello";
+    var message2 = ", my name is Scrubstep.";
+    var name = message.content.replace(/im/gi, "");
+    message.channel.send(message1 + name + message2);
+  }
+});
+
+//I'm a noob
+client.on('message', (message) => {
+  if (message.author.bot) return; // this blocks the bot from responding to other bots
+  if (message.channel.type === "dm") return; // this prevents dm commands
+  if (message.content.toLowerCase().startsWith("i'm")) {
+    var message1 = "Hello";
+    var message2 = ", my name is Scrubstep.";
+    var name = message.content.replace(/i'm/gi, "");
     message.channel.send(message1 + name + message2);
   }
 });
@@ -151,9 +153,21 @@ client.on("message", (message) => {
   if (message.author.bot) return; // this blocks the bot from responding to other bots
   if (message.channel.type === "dm") return; // this prevents dm commands
   if (!message.content.startsWith(config.prefix) || message.author.bot) return;
-  if(message.author.id !== config.ownerID) return message.channel.send({noPerm})
+  if (message.author.id !== config.ownerID) return message.channel.send({
+      embed: {
+        "color": 2588365,
+        "footer": {
+          "icon_url": client.user.avatarURL,
+          "text": client.user.username
+        },
+        "fields": [{
+          "name": "Error!",
+          "value": "You do not have permission to use this command!"
+        }]
+      }
+    });
 
-  if(message.content.startsWith(config.prefix + "prefix")) {
+  if (message.content.startsWith(config.prefix + "prefix")) {
   // Gets the prefix from the command (eg. "!prefix +" it will take the "+" from it)
   let newPrefix = message.content.split(" ").slice(1, 2)[0];
   // change the configuration in memory
